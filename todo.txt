@@ -1,0 +1,8 @@
+IDEAS
+- lots of harmless traffic, a few trucks with tnt that kill anything on contact 
+- spike strips
+- get objectives as the level goes on? one objective per level ?
+
+TODO
+- setup level boundaries 
+- prototype some gameplay to see if the game width should be greater 
