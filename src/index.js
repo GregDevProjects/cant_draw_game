@@ -11,14 +11,14 @@ let config = {
   width: width_game,
   height: height_game,
   physics: {
-      default: 'matter',
-      matter: {
-          debug: true,
-          gravity: {
-              x: 0,
-              y: 0
-          }
+    default: 'matter',
+    matter: {
+      debug: true,
+      gravity: {
+        x: 0,
+        y: 0
       }
+    }
   },
   plugins: {
     scene: [
@@ -30,15 +30,15 @@ let config = {
     ]
   },
   scene: [
-      MainMenu,
-      Game
+    MainMenu,
+    Game
   ]
 
 };
 
-const game = new Phaser.Game(config);
+const game = new Phaser.Game( config );
 
-function preload() {
+function preload () {
 
 }
 

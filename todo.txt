@@ -6,3 +6,10 @@ IDEAS
 TODO
 - setup level boundaries 
 - prototype some gameplay to see if the game width should be greater 
+- tnt should be a veichle
+    - explodes on touch?
+    - explodes after timer?
+
+GOAL OF GAME 
+    - destroy a certain number of busses
+    - protect friendly cars 

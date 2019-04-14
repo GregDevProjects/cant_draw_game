@@ -1,35 +1,50 @@
-import { width_game, get_random_int } from '../helper'
+import { width_game, get_random_int, is_actor_outside_world } from '../helper'
 
 const max_speed = 0.006
 const min_speed = 0.002
+const turn_speed = 0.15
 
-export default class Bus extends Phaser.Physics.Matter.Image {
-  constructor(config) {
-    super(config.scene.matter.world, get_random_int(0, width_game), get_random_int(0, -500), 'bus')
-    this.scene = config.scene
-    this.setMass(40)
-    this.setAngle(270)
-    this.scene.add.existing(this);
-    this.speed = get_random_int(min_speed, max_speed)
-  }
+const Bus = new Phaser.Class( {
 
-  update() {
-    this.move_backwards();
+  Extends: Phaser.Physics.Matter.Image,
+
+  initialize:
+
+  function Bus ( scene )
+  {
+    Phaser.Physics.Matter.Image.call( this, scene.matter.world, 0,0, 'bus' );
+    this.setMass( 40 )
+    this.setAngle( 270 )
+    this.speed = get_random_int( min_speed, max_speed )
+  },
+
+  start: function ()
+  {
+    this.setPosition( get_random_int( 0, width_game ), get_random_int( 0, -500 ) )
+    this.setAngle( 270 )
+    this.setActive( true )
+    this.setVisible( true )
+  },
+
+  update: function ( time, delta )
+  {
+    this.thrustBack( this.speed )
     this.angle_to_straight();
+    if ( is_actor_outside_world( this ) ) {
+      this.start()
+    }
+  },
 
-  }
-
-  move_backwards() {
-    this.thrustBack(this.speed)
-  }
-
-  angle_to_straight() {
-    if (this.angle < -90) {
+  angle_to_straight () {
+    if ( this.angle < -90 ) {
       //this.setAngularVelocity(0.00001)
-      this.angle += 0.3
-    } else if (this.angle > -90) {
+      this.angle += turn_speed
+    } else if ( this.angle > -90 ) {
       //this.setAngularVelocity(-0.00001)
-      this.angle -= 0.3
+      this.angle -= turn_speed
     }
   }
-}
+
+} );
+
+export default Bus
