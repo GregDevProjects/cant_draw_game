@@ -5,8 +5,11 @@ import player from '../assets/player.png'
 import bus from '../assets/bus.png'
 import image_highway from '../assets/highway.png'
 import tnt from '../assets/tnt.png'
+import nothing from '../assets/fire.png'
+import Buddy from '../assets/buddy.png'
+
 import {width_game, height_game} from '../helper'
-import nothing from '../assets/nothing.png'
+
 
 export class MainMenu extends Phaser.Scene {
   constructor () {
@@ -21,6 +24,7 @@ export class MainMenu extends Phaser.Scene {
     this.load.image( 'bus', bus )
     this.load.image( 'tnt', tnt )
     this.load.image( 'nothing', nothing )
+    this.load.image( 'buddy', Buddy )
   }
 
   create () {

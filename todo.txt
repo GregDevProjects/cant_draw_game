@@ -9,6 +9,7 @@ TODO
 - tnt should be a veichle
     - explodes on touch?
     - explodes after timer?
+- actors spin when hit
 
 GOAL OF GAME 
     - destroy a certain number of busses

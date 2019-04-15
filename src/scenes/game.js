@@ -2,6 +2,8 @@ import { width_game, height_game } from '../helper'
 import Player from '../actors/player'
 import Bus from '../actors/bus'
 import Tnt from '../actors/tnt'
+import make_explosion from '../actors/explosion'
+import Buddy from '../actors/buddy'
 import { mouse_click } from '../controller'
 
 export class Game extends Phaser.Scene {
@@ -16,38 +18,39 @@ export class Game extends Phaser.Scene {
   create () {
     this.make_background();
 
-    this.bullets = this.add.group( {
+    this.bus_group = this.add.group( {
       classType: Bus,
       maxSize: 10,
       runChildUpdate: true
-    } );
-
-
-
-    mouse_click( this.input, ( coords )=>{
-      this.last = this.matter.add.image( coords.x, coords.y, 'nothing'  )
-      this.last.setBody( { type: 'polygon', sides: 40, radius: 2 }, {} );
-
-      //debugger
-      // this.last.setCircle( true )
-      // debugger
-      // last.body.circleRadius = 1
-      // last.setStatic()
-      // last.setMass( 60 )
-      //debugger
-      // if( this.last ){
-
-      //   this.last.destroy()
-      // }
-      // debugger
     } )
 
-    for( let _ = 0; _ < 10; _++ ) {
-      const bullet = this.bullets.get()
-      bullet.start()
-    }
+    this.tnt_group = this.add.group( {
+      classType: Tnt,
+      maxSize: 10,
+      runChildUpdate: true
+    } )
+
+    this.buddy_group = this.add.group( {
+      classType: Buddy,
+      maxSize: 2,
+      runChildUpdate: true
+    } )
+
+    const buddy_test = this.buddy_group.get()
+    buddy_test.start()
+
+    mouse_click( this.input, ( coords )=>{
+
+      make_explosion( coords.x, coords.y, this )
+
+
+    } )
 
     this.player = new Player( { scene: this, x: 50, y: 50 } )
+
+  }
+
+  explode () {
 
   }
 
@@ -65,18 +68,16 @@ export class Game extends Phaser.Scene {
     this.bg.tilePositionY -= 2
     this.player.update()
 
-
-
-    if ( this.last && this.last.active ){
-      this.last.setScale( this.last.scaleX+=5, this.last.scaleY+=5 )
-      if( this.last.scaleX > 50 ) {
-        this.last.destroy()
-      }
+    if ( this.tnt_group.getLength() < 5 ) {
+      const tnt = this.tnt_group.get()
+      tnt.start()
     }
-    if ( this.isDown ) {
-      console.log( 'yo' )
-
+    console.log( this.tnt_group.getLength() )
+    if ( this.bus_group.getLength() < 10 ) {
+      const bus = this.bus_group.get()
+      bus.start()
     }
+
   }
 
 }

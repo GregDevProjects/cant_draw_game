@@ -1,34 +1,28 @@
 import { width_game, get_random_int, is_actor_outside_world } from '../helper'
 import { angle_to_straight } from '../ai'
-import make_explosion from './explosion'
 
-const max_speed = 0.004
-const min_speed = 0.0005
-const turn_speed = 0.15
-
-const Bus = new Phaser.Class( {
+const Buddy = new Phaser.Class( {
 
   Extends: Phaser.Physics.Matter.Image,
 
   initialize:
 
-  function Bus ( scene )
+  function Buddy ( scene )
   {
-    Phaser.Physics.Matter.Image.call( this, scene.matter.world, 0,0, 'bus' );
+    Phaser.Physics.Matter.Image.call( this, scene.matter.world, 600,500, 'buddy' );
     this.setMass( 10 )
     this.setAngle( 270 )
     this.body.restitution = 1
-    this.speed = get_random_int( min_speed, max_speed )
+    this.speed = 0
 
   },
 
   start: function ()
   {
-    this.setPosition( get_random_int( 0, width_game ), get_random_int( 0, -500 ) )
+    // this.setPosition( get_random_int( 0, width_game ), get_random_int( 0, -500 ) )
     this.setAngle( 270 )
     this.setActive( true )
     this.setVisible( true )
-    this.collisionHandler()
 
   },
 
@@ -55,23 +49,10 @@ const Bus = new Phaser.Class( {
   update: function ( time, delta )
   {
     this.thrustBack( this.speed )
-    angle_to_straight( this, turn_speed );
-
-    if( this.is_spinning ) {
-      this.spin()
-    }
-
-    if ( is_actor_outside_world( this ) ) {
-      this.destroy()
-    }
-
+    angle_to_straight( this, 0.1 );
 
   },
 
-  spin () {
-    this.angle+=3
-  }
-
 } );
 
-export default Bus
+export default Buddy
