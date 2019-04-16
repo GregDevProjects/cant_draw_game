@@ -22,9 +22,9 @@ const Bus = new Phaser.Class( {
 
   },
 
-  start: function ()
+  start: function ( x,y )
   {
-    this.setPosition( get_random_int( 0, width_game ), get_random_int( 0, -500 ) )
+    this.setPosition( x,y )
     this.setAngle( 270 )
     this.setActive( true )
     this.setVisible( true )
@@ -54,17 +54,12 @@ const Bus = new Phaser.Class( {
 
   update: function ( time, delta )
   {
-    this.thrustBack( this.speed )
+    this.thrust( this.speed )
     angle_to_straight( this, turn_speed );
 
     if( this.is_spinning ) {
       this.spin()
     }
-
-    if ( is_actor_outside_world( this ) ) {
-      this.destroy()
-    }
-
 
   },
 

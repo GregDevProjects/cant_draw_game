@@ -2,8 +2,9 @@ import Phaser from "phaser";
 
 import { MainMenu } from './scenes/main_menu'
 import { Game } from './scenes/game'
+import { GameOver } from './scenes/game_over'
 import PhaserMatterCollisionPlugin from "phaser-matter-collision-plugin"
-import {width_game, height_game} from './helper'
+import { width_game, height_game } from './helper'
 
 let config = {
   type: Phaser.AUTO,
@@ -17,9 +18,6 @@ let config = {
       gravity: {
         x: 0,
         y: 0
-      },
-      options: {
-        wireframes: false // <-- important
       }
     }
   },
@@ -34,7 +32,8 @@ let config = {
   },
   scene: [
     MainMenu,
-    Game
+    Game,
+    GameOver
   ]
 
 };

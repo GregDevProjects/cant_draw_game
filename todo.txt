@@ -4,13 +4,19 @@ IDEAS
 - get objectives as the level goes on? one objective per level ?
 
 TODO
-- setup level boundaries 
-- prototype some gameplay to see if the game width should be greater 
-- tnt should be a veichle
-    - explodes on touch?
-    - explodes after timer?
-- actors spin when hit
+- redo actor ai
+    - move forward 
+    - where to spawn
+    - can they turn?
 
 GOAL OF GAME 
     - destroy a certain number of busses
     - protect friendly cars 
+
+MVP
+- implement all actors
+- can get game over 
+- starts with briefing  
+
+CHERRY-ON-TOP
+- coundown in the grass before death

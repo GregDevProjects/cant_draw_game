@@ -12,3 +12,31 @@ export function is_actor_outside_world ( actor ) {
     actor.x > width_game + actor.height/2 ||
     actor.x < - actor.height/2
 }
+
+export function make_polygon_from_vertices ( x,y,vertex, scene ) {
+  const vertices = Phaser.Physics.Matter.Matter.Vertices.clockwiseSort(
+    [vertex ]
+  );
+  const new_wall = scene.matter.add.fromVertices(
+    x,
+    y,
+    vertices,
+    {isStatic: true, isSensor: true, isWall:true} //isWall = hack to give matterCollision a way to recognize a non-phaser object
+  )
+  new_wall.isWall=true
+
+  return new_wall
+
+}
+
+export function make_button_tween ( target,scene ) {
+  scene.tweens.add(
+    {
+      targets: target,
+      scaleX: 1.2,
+      scaleY: 1.2,
+      yoyo: true,
+      repeat: -1
+    }
+  );
+}

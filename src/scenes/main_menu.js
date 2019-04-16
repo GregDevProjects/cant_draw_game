@@ -7,8 +7,11 @@ import image_highway from '../assets/highway.png'
 import tnt from '../assets/tnt.png'
 import nothing from '../assets/fire.png'
 import Buddy from '../assets/buddy.png'
+import test_track from '../assets/test_track.png'
+import grass_dead from '../assets/grass_dead.png'
+import restart from '../assets/restart.png'
 
-import {width_game, height_game} from '../helper'
+import {width_game, height_game, make_button_tween} from '../helper'
 
 
 export class MainMenu extends Phaser.Scene {
@@ -25,6 +28,9 @@ export class MainMenu extends Phaser.Scene {
     this.load.image( 'tnt', tnt )
     this.load.image( 'nothing', nothing )
     this.load.image( 'buddy', Buddy )
+    this.load.image( 'test_track', test_track )
+    this.load.image( 'grass_dead', grass_dead )
+    this.load.image( 'restart', restart )
   }
 
   create () {
@@ -44,17 +50,8 @@ export class MainMenu extends Phaser.Scene {
         console.log( 'pizza' )
       }, this )
 
+    make_button_tween( pizza, this )
 
-
-    this.tweens.add(
-      {
-        targets: pizza,
-        scaleX: 1.2,
-        scaleY: 1.2,
-        yoyo: true,
-        repeat: -1
-      }
-    );
   }
 
   start () {
