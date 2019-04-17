@@ -6,6 +6,7 @@ import make_explosion from '../actors/explosion'
 import Buddy from '../actors/buddy'
 import { mouse_click, editor_mode } from '../controller'
 import make_track_1 from '../tracks/1'
+import make_track_2 from '../tracks/2'
 import Spawner from '../spawner'
 
 export class Game extends Phaser.Scene {
@@ -22,7 +23,7 @@ export class Game extends Phaser.Scene {
 
 
     make_track_1( this )
-
+    make_track_2 ( this )
     this.bus_group = this.add.group( {
       classType: Bus,
       maxSize: 10,

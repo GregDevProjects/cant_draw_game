@@ -48,6 +48,7 @@ export function control_matter_object ( cursors, object ) {
 
     object.thrustBack( 0.002 );
     if ( editor_mode ) {
+      object.setFrictionAir( 1 )
       object.thrustBack( 5.102 );
     }
   }
