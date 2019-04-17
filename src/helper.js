@@ -40,3 +40,16 @@ export function make_button_tween ( target,scene ) {
     }
   );
 }
+
+export function make_explode_effect ( scene, target ) {
+  scene.add.particles( 'orange_particle' ).createEmitter( {
+    x: target.x,
+    y: target.y,
+    speed: { min: -400, max: 400 },
+    angle: { min: 0, max: 360 },
+    blendMode: 'SCREEN',
+    lifespan: 400,
+    quantity: 20,
+    scale: {start:5,end:0}
+  } ).explode();
+}

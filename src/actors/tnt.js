@@ -22,9 +22,9 @@ const Tnt = new Phaser.Class( {
     this.speed = get_random_int( min_speed, max_speed )
   },
 
-  start: function ()
+  start: function ( x, y )
   {
-    this.setPosition( get_random_int( 0, width_game ), get_random_int( 0, -500 ) )
+    this.setPosition( x, y )
     this.setAngle( 270 )
     this.setActive( true )
     this.setVisible( true )
@@ -41,15 +41,11 @@ const Tnt = new Phaser.Class( {
       callback: eventData => {
         const { bodyB, gameObjectB } = eventData;
         // if ( gameObjectB.constructor.name === "Player" ||  ) {
-        if ( this.is_in_bounds() ){
-          this.activated = true
+
+        this.activated = true
+        if ( !this.explode_timer ){
+          this.explode_timer = this.scene.time.delayedCall( 1000, this.explode, [], this );
         }
-
-
-        // }
-        //console.log( "Player touched", bodyB );
-        // bodyB will be the matter body that the player touched
-        // gameObjectB will be the game object that owns bodyB, or undefined if there's no game object
       }
     } );
 
@@ -61,7 +57,7 @@ const Tnt = new Phaser.Class( {
     if ( this.activated ) {
       this.angle+=6
     } else {
-      this.thrustBack( this.speed )
+      this.thrust( this.speed )
     }
 
     angle_to_straight( this, turn_speed )
@@ -70,15 +66,6 @@ const Tnt = new Phaser.Class( {
       this.bomb_text.setText( this.explode_timer.getProgress().toString().substr( 0, 4 ) );
       this.bomb_text.x = this.x
       this.bomb_text.y = this.y
-    }
-
-
-    if ( this.is_in_bounds() && !this.explode_timer && this.activated ) {
-      this.explode_timer = this.scene.time.delayedCall( 1000, this.explode, [], this );
-    }
-
-    if ( is_actor_outside_world( this ) ) {
-      this.destroy()
     }
 
   },

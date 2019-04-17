@@ -1,10 +1,9 @@
-import { width_game, get_random_int, is_actor_outside_world } from '../helper'
+import { get_random_int, make_explode_effect } from '../helper'
 import { angle_to_straight } from '../ai'
-import make_explosion from './explosion'
 
 const max_speed = 0.004
 const min_speed = 0.0005
-const turn_speed = 0.15
+const turn_speed = 0.2
 
 const Bus = new Phaser.Class( {
 
@@ -14,7 +13,9 @@ const Bus = new Phaser.Class( {
 
   function Bus ( scene )
   {
-    Phaser.Physics.Matter.Image.call( this, scene.matter.world, 0,0, 'bus' );
+    Phaser.Physics.Matter.Image.call( this, scene.matter.world, 0,0, 'bus' )
+    this.scene = scene
+
     this.setMass( 10 )
     this.setAngle( 270 )
     this.body.restitution = 1
@@ -37,34 +38,50 @@ const Bus = new Phaser.Class( {
       objectA: this,
       callback: eventData => {
         const { bodyB, gameObjectB } = eventData;
+        if ( bodyB.isWall ) {
+          this.death()
+        }
         if ( !bodyB.gameObject ){
           return
         }
-        if ( bodyB.gameObject.constructor.name === "Explosion" ) {
-          console.log( 'SLIDE' )
+        if ( gameObjectB.constructor.name === "Explosion" ) {
           this.body.friction = 0
           this.speed = 0
-          this.destroy()
+          this.death()
+
 
         }
+        if ( gameObjectB.constructor.name === "Player" ) {
+          this.is_spinning = true
+          this.scene.time.delayedCall( 2000, this.stop_spin, [], this );
+        }
 
-      }
+      },
+      context: this
     } );
   },
 
   update: function ( time, delta )
   {
     this.thrust( this.speed )
-    angle_to_straight( this, turn_speed );
+
 
     if( this.is_spinning ) {
       this.spin()
+    } else {
+      angle_to_straight( this, turn_speed );
     }
 
   },
-
+  death ( ) {
+    make_explode_effect( this.scene, this )
+    this.destroy()
+  },
   spin () {
-    this.angle+=3
+    this.angle+=5
+  },
+  stop_spin () {
+    this.is_spinning = false
   }
 
 } );

@@ -23,15 +23,21 @@ export class Game extends Phaser.Scene {
 
     make_track_1( this )
 
-
+    this.bus_group = this.add.group( {
+      classType: Bus,
+      maxSize: 10,
+      runChildUpdate: true
+    } )
 
 
     mouse_click( this.input, ( coords )=>{
       this.vertex_debug_string +="{x:" + coords.x +", y:"+ coords.y + "},"
 
-      this.matter.add.image( coords.x,coords.y, 'tnt' ).body.isSensor = true
+      // this.matter.add.image( coords.x,coords.y, 'tnt' ).body.isSensor = true
       console.log( this.vertex_debug_string )
       // make_explosion( coords.x, coords.y, this )
+      const bus = this.bus_group.get()
+      bus.start( coords.x, coords.y )
 
 
     } )

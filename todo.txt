@@ -4,10 +4,9 @@ IDEAS
 - get objectives as the level goes on? one objective per level ?
 
 TODO
-- redo actor ai
-    - move forward 
-    - where to spawn
-    - can they turn?
+- spawn busses/tnt
+- implement timer for game
+- countdown grass timer 
 
 GOAL OF GAME 
     - destroy a certain number of busses
@@ -16,7 +15,8 @@ GOAL OF GAME
 MVP
 - implement all actors
 - can get game over 
-- starts with briefing  
+- starts with briefing 
+- main screen should be tutorial
 
 CHERRY-ON-TOP
 - coundown in the grass before death
