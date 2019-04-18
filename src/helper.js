@@ -41,8 +41,8 @@ export function make_button_tween ( target,scene ) {
   );
 }
 
-export function make_explode_effect ( scene, target ) {
-  scene.add.particles( 'orange_particle' ).createEmitter( {
+export function make_explode_effect ( scene, target, img='orange_particle' ) {
+  scene.add.particles( img ).createEmitter( {
     x: target.x,
     y: target.y,
     speed: { min: -400, max: 400 },

@@ -25,7 +25,7 @@ export default class Player extends Phaser.Physics.Matter.Image {
     this.grass_text.setDepth( 2 )
     this.grass_emitter.startFollow( this, 250, 10 );
     this.grass_emitter.setVisible( false )
-
+    this.queue_speed = false
     this.grass_emitter.active = false
     //so the emitter is under this
     this.setDepth( 1 )
@@ -45,6 +45,12 @@ export default class Player extends Phaser.Physics.Matter.Image {
           this.grass_emitter.setVisible( true )
 
           this.grass_timer = this.scene.time.delayedCall( 3000, this.timerDeath, [], this );
+        }
+        if ( !gameObjectB ) {
+          return
+        }
+        if ( gameObjectB.constructor.name === "SpeedArrow" ) {
+          this.queue_speed = true;
         }
       },
       context: this
@@ -79,6 +85,10 @@ export default class Player extends Phaser.Physics.Matter.Image {
     control_matter_object( this.cursors, this )
     if ( this.grass_timer ) {
       this.show_time_to_grass_death()
+    }
+    if ( this.queue_speed ) {
+      Phaser.Physics.Matter.Matter.Body.applyForce( this.body,{x: this.x, y: this.y}, {x: 0, y: -0.55} )
+      this.queue_speed = false
     }
   }
 

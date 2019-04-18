@@ -4,9 +4,8 @@ IDEAS
 - get objectives as the level goes on? one objective per level ?
 
 TODO
-- spawn busses/tnt
-- implement timer for game
-- countdown grass timer 
+- finish map
+- add go fast arrow
 
 GOAL OF GAME 
     - destroy a certain number of busses
@@ -19,4 +18,5 @@ MVP
 - main screen should be tutorial
 
 CHERRY-ON-TOP
-- coundown in the grass before death
+- missiles
+- game gets more wipish as it goes on

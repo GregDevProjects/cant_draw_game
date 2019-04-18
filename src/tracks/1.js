@@ -22,14 +22,9 @@ export default function make_track_1 ( scene ) {
   ]
 
   make_polygon_from_vertices( -290,-4235, left_walls, scene )
-
-
   make_polygon_from_vertices( 80,-560, center_start, scene )
-
   make_polygon_from_vertices( 204,-3741,right_walls, scene )
-
   make_polygon_from_vertices( 274,-7970,right_walls_upper, scene )
-
   make_polygon_from_vertices( 10,-7825,center_diamond, scene )
 
   scene.add.image(
@@ -37,7 +32,7 @@ export default function make_track_1 ( scene ) {
     0,
     // width_game * 2,
     // height_game * 2,
-    'test_track'
+    'track_1'
   ).setOrigin( 0.5,1 )
 
 }

@@ -34,12 +34,12 @@ export class Game extends Phaser.Scene {
     mouse_click( this.input, ( coords )=>{
       this.vertex_debug_string +="{x:" + coords.x +", y:"+ coords.y + "},"
 
-      // this.matter.add.image( coords.x,coords.y, 'tnt' ).body.isSensor = true
+      this.matter.add.image( coords.x,coords.y, 'orange_particle' ).body.isSensor = true
       console.log( this.vertex_debug_string )
       // make_explosion( coords.x, coords.y, this )
-      const bus = this.bus_group.get()
-      bus.start( coords.x, coords.y )
-
+      // const bus = this.bus_group.get()
+      // bus.start( coords.x, coords.y )
+      //this.player.thrust( 100 )
 
     } )
 
@@ -49,8 +49,12 @@ export class Game extends Phaser.Scene {
     this.cameras.main.startFollow( this.player );
     this.cameras.main.followOffset.set( 0, 200 );
     if ( editor_mode ) {
-      this.cameras.main.setZoom( 0.3 )
+      this.cameras.main.setZoom( 0.4 )
+      const startAt = {x:242.78208879751094, y:-14174.18665689183}
+      this.player.x = startAt.x
+      this.player.y = startAt.y
     }
+
 
   }
 

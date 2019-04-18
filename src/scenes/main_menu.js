@@ -7,12 +7,14 @@ import image_highway from '../assets/highway.png'
 import tnt from '../assets/tnt.png'
 import nothing from '../assets/fire.png'
 import Buddy from '../assets/buddy.png'
-import test_track from '../assets/test_track.png'
+import track_1 from '../assets/test_track.png'
 import grass_dead from '../assets/grass_dead.png'
 import restart from '../assets/restart.png'
 import orange_particle from '../assets/orange_particle.png'
 import green_particle from '../assets/green_particle.png'
 import track_2 from '../assets/track_2.png'
+import speed_arrow from '../assets/speed_arrow.png'
+import red_particle from '../assets/red_particle.png'
 
 import {width_game, height_game, make_button_tween} from '../helper'
 
@@ -31,12 +33,14 @@ export class MainMenu extends Phaser.Scene {
     this.load.image( 'tnt', tnt )
     this.load.image( 'nothing', nothing )
     this.load.image( 'buddy', Buddy )
-    this.load.image( 'test_track', test_track )
+    this.load.image( 'track_1', track_1 )
     this.load.image( 'track_2', track_2 )
     this.load.image( 'grass_dead', grass_dead )
     this.load.image( 'restart', restart )
     this.load.image( 'orange_particle',orange_particle )
     this.load.image( 'green_particle',green_particle )
+    this.load.image( 'red_particle',red_particle )
+    this.load.image( 'speed_arrow', speed_arrow )
   }
 
   create () {
