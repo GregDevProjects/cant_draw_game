@@ -7,7 +7,9 @@ import Buddy from '../actors/buddy'
 import { mouse_click, editor_mode } from '../controller'
 import make_track_1 from '../tracks/1'
 import make_track_2 from '../tracks/2'
+import make_track_3 from '../tracks/3'
 import Spawner from '../spawner'
+
 
 export class Game extends Phaser.Scene {
   constructor () {
@@ -20,10 +22,9 @@ export class Game extends Phaser.Scene {
 
   create () {
     this.vertex_debug_string = ""
-
-
     make_track_1( this )
-    make_track_2 ( this )
+    make_track_2( this )
+    make_track_3( this )
     this.bus_group = this.add.group( {
       classType: Bus,
       maxSize: 10,
@@ -50,11 +51,13 @@ export class Game extends Phaser.Scene {
     this.cameras.main.followOffset.set( 0, 200 );
     if ( editor_mode ) {
       this.cameras.main.setZoom( 0.4 )
-      const startAt = {x:242.78208879751094, y:-14174.18665689183}
+      const startAt = {x:242.78208879751094, y:-23989}
       this.player.x = startAt.x
       this.player.y = startAt.y
     }
-
+    const startAt = {x:100.78208879751094, y:-21939}
+    this.player.x = startAt.x
+    this.player.y = startAt.y
 
   }
 
