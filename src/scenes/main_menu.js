@@ -31,6 +31,14 @@ import pizza_player from '../assets/pizza_player.png'
 import pizza from '../assets/pizza.png'
 import pizza_particle from '../assets/pizza_particle.png'
 import finish from '../assets/finish.png'
+import report from '../assets/report.png'
+import report_checked from '../assets/report_checked.png'
+import report_unchecked from '../assets/report_unchecked.png'
+import next from '../assets/next.png'
+import A_plus from '../assets/A+.png'
+import A from '../assets/A.png'
+import B from '../assets/B.png'
+import C from '../assets/C.png'
 
 import {width_game, height_game, make_button_tween} from '../helper'
 
@@ -73,6 +81,14 @@ export class MainMenu extends Phaser.Scene {
     this.load.image( 'pizza', pizza )
     this.load.image( 'pizza_particle', pizza_particle )
     this.load.image( 'finish', finish )
+    this.load.image( 'report', report )
+    this.load.image( 'report_checked', report_checked )
+    this.load.image( 'report_unchecked', report_unchecked )
+    this.load.image( 'A+', A_plus )
+    this.load.image( 'A', A )
+    this.load.image( 'B', B )
+    this.load.image( 'C', C )
+    this.load.image( 'next', next )
   }
 
   create () {
@@ -81,8 +97,8 @@ export class MainMenu extends Phaser.Scene {
 
     this.start()
 
-    // this.scene.stop();
-    // this.scene.start( 'game' );
+    this.scene.stop();
+    this.scene.start( 'win' );
   }
 
 
