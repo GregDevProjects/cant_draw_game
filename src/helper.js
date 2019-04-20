@@ -41,7 +41,7 @@ export function make_button_tween ( target,scene ) {
   );
 }
 
-export function make_explode_effect ( scene, target, img='orange_particle' ) {
+export function make_explode_effect ( scene, target, img='orange_particle', big = false ) {
   const particles = scene.add.particles( img )
 
   particles.createEmitter( {
@@ -50,9 +50,9 @@ export function make_explode_effect ( scene, target, img='orange_particle' ) {
     speed: { min: -400, max: 400 },
     angle: { min: 0, max: 360 },
     blendMode: 'SCREEN',
-    lifespan: 400,
-    quantity: 20,
-    scale: {start:5,end:0},
+    lifespan: big ? 800 : 400,
+    quantity: big? 25 : 20,
+    scale: {start: big? 7 : 5,end:0},
   } ).explode();
 
   particles.setDepth( 2 );

@@ -6,7 +6,6 @@ import bus from '../assets/bus.png'
 import image_highway from '../assets/highway.png'
 import tnt from '../assets/tnt.png'
 import nothing from '../assets/fire.png'
-import Buddy from '../assets/buddy.png'
 import track_1 from '../assets/track_1.png'
 import grass_dead from '../assets/grass_dead.png'
 import restart from '../assets/restart.png'
@@ -28,6 +27,10 @@ import health_1 from '../assets/1.png'
 import health_2 from '../assets/2.png'
 import health_3 from '../assets/3.png'
 import explode_dead from '../assets/explode_dead.png'
+import pizza_car from '../assets/pizza_car.png'
+import pizza_player from '../assets/pizza_player.png'
+import pizza from '../assets/pizza.png'
+import pizza_particle from '../assets/pizza_particle.png'
 
 import {width_game, height_game, make_button_tween} from '../helper'
 
@@ -45,7 +48,6 @@ export class MainMenu extends Phaser.Scene {
     this.load.image( 'bus', bus )
     this.load.image( 'tnt', tnt )
     this.load.image( 'nothing', nothing )
-    this.load.image( 'buddy', Buddy )
     this.load.image( 'track_1', track_1 )
     this.load.image( 'track_2', track_2 )
     this.load.image( 'track_3', track_3 )
@@ -67,6 +69,10 @@ export class MainMenu extends Phaser.Scene {
     this.load.image( 'health_2', health_2 )
     this.load.image( 'health_3', health_3 )
     this.load.image( 'explode_dead', explode_dead )
+    this.load.image( 'pizza_car', pizza_car )
+    this.load.image( 'pizza_player', pizza_player )
+    this.load.image( 'pizza', pizza )
+    this.load.image( 'pizza_particle', pizza_particle )
   }
 
   create () {

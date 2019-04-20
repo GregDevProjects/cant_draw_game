@@ -29,7 +29,6 @@ const Tnt = new Phaser.Class( {
     this.setActive( true )
     this.setVisible( true )
     this.collisionHandler()
-    this.bomb_text = this.scene.add.text( this.x,this.y )
 
     this.explode_timer = false
     this.activated = false
@@ -42,16 +41,32 @@ const Tnt = new Phaser.Class( {
         const { bodyB, gameObjectB } = eventData;
         // if ( gameObjectB.constructor.name === "Player" ||  ) {
 
-        this.activated = true
-        if ( !this.explode_timer ){
-          this.explode_timer = this.scene.time.delayedCall( 1000, this.explode, [], this );
+        if ( bodyB.isWall ) {
+          this.spin_out_explode()
         }
+
+        if ( !gameObjectB ) {
+          return
+        }
+
+        if ( gameObjectB.constructor.name === "PizzaProjectile" || gameObjectB.constructor.name === "Missile" ) {
+          this.explode()
+
+          return;
+        }
+
+        this.spin_out_explode()
       }
     } );
 
 
   },
-
+  spin_out_explode () {
+    this.activated = true
+    if ( !this.explode_timer ){
+      this.explode_timer = this.scene.time.delayedCall( 1000, this.explode, [], this );
+    }
+  },
   update: function ( time, delta )
   {
     if ( this.activated ) {
@@ -61,12 +76,6 @@ const Tnt = new Phaser.Class( {
     }
 
     angle_to_straight( this, turn_speed )
-
-    if ( this.explode_timer ) {
-      this.bomb_text.setText( this.explode_timer.getProgress().toString().substr( 0, 4 ) );
-      this.bomb_text.x = this.x
-      this.bomb_text.y = this.y
-    }
 
   },
 
@@ -80,7 +89,6 @@ const Tnt = new Phaser.Class( {
       return
     }
     make_explostion( this.x, this.y, this.scene )
-    this.bomb_text.destroy()
     this.destroy()
   }
 

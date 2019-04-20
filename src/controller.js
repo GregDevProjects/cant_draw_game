@@ -59,3 +59,9 @@ export function mouse_click ( input, callback_function ){
     callback_function( {x:pointer.worldX, y:pointer.worldY} )
   } )
 }
+
+export function mouse_move ( input, callback_function ) {
+  input.on( 'pointermove', function ( pointer ) {
+    callback_function( {x:pointer.worldX, y:pointer.worldY} )
+  } );
+}

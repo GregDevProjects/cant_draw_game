@@ -3,7 +3,6 @@ import Player from '../actors/player'
 import Bus from '../actors/bus'
 import Tnt from '../actors/tnt'
 import make_explosion from '../actors/explosion'
-import Buddy from '../actors/buddy'
 import { mouse_click, editor_mode } from '../controller'
 import make_track_1 from '../tracks/1'
 import make_track_2 from '../tracks/2'
@@ -35,18 +34,20 @@ export class Game extends Phaser.Scene {
 
 
     mouse_click( this.input, ( coords )=>{
-      this.vertex_debug_string +="{x:" + coords.x +", y:"+ coords.y + "},"
+      if ( editor_mode ){
+        this.vertex_debug_string +="{x:" + coords.x +", y:"+ coords.y + "},"
 
-      this.matter.add.image( coords.x,coords.y, 'orange_particle' ).body.isSensor = true
-      console.log( this.vertex_debug_string )
+        this.matter.add.image( coords.x,coords.y, 'orange_particle' ).body.isSensor = true
+        console.log( this.vertex_debug_string )
       // make_explosion( coords.x, coords.y, this )
       // const bus = this.bus_group.get()
       // bus.start( coords.x, coords.y )
       //this.player.thrust( 100 )
+      }
 
     } )
 
-    this.player = new Player( { scene: this, x: -250, y: 0 } )
+    this.player = new Player( { scene: this, x: -250, y: -50 } )
     this.spawner = new Spawner( this )
 
     this.cameras.main.startFollow( this.player );

@@ -1,6 +1,7 @@
-import {control_matter_object} from '../controller'
+import {control_matter_object, mouse_click, mouse_move} from '../controller'
 import {editor_mode} from '../controller'
-import {make_text_effect} from '../helper'
+import {make_text_effect, make_explode_effect} from '../helper'
+import PizzaProjectile from './pizza_projectile';
 
 export default class Player extends Phaser.Physics.Matter.Image {
   constructor ( config ) {
@@ -29,8 +30,35 @@ export default class Player extends Phaser.Physics.Matter.Image {
     this.queue_speed = false
     this.grass_emitter.active = false
     this.health = 4
+    this.has_pizza = false
     //so the grass emitter is under this
     this.setDepth( 1 )
+
+    this.pizza_projectile_group = this.scene.add.group( {
+      classType: PizzaProjectile,
+      maxSize: 10,
+      runChildUpdate: true
+    } )
+
+    this.pizza_img = this.scene.add.image( this.x, this.y,'pizza' )
+    this.pizza_img.setDepth( 2 )
+    this.pizza_img.angle = 90
+    this.pizza_img.setVisible( false )
+
+    this.mouseHandler()
+  }
+
+  mouseHandler () {
+    mouse_move( this.scene.input, ( coords )=>{
+      if ( !this.has_pizza ) {
+        return
+      }
+      this.pizza_img.setRotation(  Phaser.Math.Angle.Between( coords.x, coords.y, this.x, this.y ) );
+    } )
+
+    mouse_click( this.scene.input, ( coords )=>{
+      this.shoot_pizza( coords )
+    } )
   }
 
   collisionHandler () {
@@ -61,6 +89,11 @@ export default class Player extends Phaser.Physics.Matter.Image {
           this.take_damage()
           this.start_spin()
         }
+        if ( gameObjectB.constructor.name === "PizzaCar" ) {
+          //stop player from losing momentum when colliding with pizza
+          eventData.pair.isActive = false
+          this.pickup_pizza()
+        }
       },
       context: this
     } );
@@ -81,6 +114,13 @@ export default class Player extends Phaser.Physics.Matter.Image {
     } );
 
   }
+
+  pickup_pizza () {
+    make_explode_effect( this.scene,this, 'pizza_particle' )
+    this.has_pizza = true
+    this.pizza_img.setVisible( true )
+  }
+
   start_spin () {
     this.spinning = true
     this.scene.time.delayedCall( 1000, ()=>{ this.spinning = false }, [], this );
@@ -133,6 +173,18 @@ export default class Player extends Phaser.Physics.Matter.Image {
       this.queue_back = false
       Phaser.Physics.Matter.Matter.Body.applyForce( this.body,{x: this.x, y: this.y}, {x: 0, y: 0.2} )
     }
+    this.pizza_img.x = this.x
+    this.pizza_img.y = this.y
+  }
+
+  shoot_pizza ( coords ) {
+    if ( !this.has_pizza ) {
+      return
+    }
+    const pizza = this.pizza_projectile_group.get()
+    pizza.start( this.x, this.y , coords.x, coords.y )
+    this.has_pizza = false
+    this.pizza_img.setVisible( false )
   }
 
   show_time_to_grass_death () {

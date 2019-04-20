@@ -33,7 +33,7 @@ const Missile = new Phaser.Class( {
     this.setActive( true )
     this.setVisible( true )
     this.collisionHandler()
-    this.scene.time.addEvent( { delay: 4000, callback: this.self_destruct, callbackScope: this, repeat: -1 } );
+    this.scene.time.addEvent( { delay: 3000, callback: this.self_destruct, callbackScope: this, repeat: -1 } );
   },
   self_destruct () {
     this.destroy()
@@ -47,16 +47,12 @@ const Missile = new Phaser.Class( {
       objectA: this,
       callback: eventData => {
         const { bodyB, gameObjectB } = eventData;
-
-        if ( !bodyB.isWall && gameObjectB.constructor.name !== "Helicopter" ) {
+        if ( !gameObjectB ) {
+          return
+        }
+        if ( gameObjectB.constructor.name !== "Helicopter" ) {
           this.hit_something()
         }
-        // if ( !gameObjectB ) {
-        //   return
-        // }
-        // if ( gameObjectB.constructor.name === "Player" ) {
-        //   console.log( 'player collide' )
-        // }
       }
     } );
 

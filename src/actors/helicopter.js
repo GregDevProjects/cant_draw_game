@@ -19,25 +19,24 @@ const Helicopter = new Phaser.Class( {
     this.setMass( 10 )
     this.setAngle( 270 )
     this.setFrictionAir( 0.08 )
-
+    this.health = 2
     this.missile_group = this.scene.add.group( {
       classType: Missile,
-      maxSize: 2,
+      maxSize: 20,
       runChildUpdate: true
     } )
-
+    this.setDepth( 1 )
 
   },
 
   start: function ( x, y )
   {
     this.setPosition( x, y )
-    // this.setAngle( 270 )
     this.setActive( true )
     this.setVisible( true )
     this.collisionHandler()
 
-    this.scene.time.addEvent( { delay: 2000, callback: this.shoot, callbackScope: this, repeat: -1 } );
+    this.missile_timer = this.scene.time.addEvent( { delay: 2000, callback: this.shoot, callbackScope: this, repeat: -1 } );
   },
 
   collisionHandler () {
@@ -45,12 +44,17 @@ const Helicopter = new Phaser.Class( {
       objectA: this,
       callback: eventData => {
         const { bodyB, gameObjectB } = eventData;
-        // if ( !gameObjectB ) {
-        //   return
-        // }
-        // if ( gameObjectB.constructor.name === "Player" ) {
-        //   console.log( 'player collide' )
-        // }
+        if ( !gameObjectB ) {
+          return
+        }
+        if ( gameObjectB.constructor.name === "PizzaProjectile" ) {
+          this.health --
+          if ( this.health <= 0 ) {
+            make_explode_effect( this.scene, this, undefined, true )
+            this.missile_timer.destroy()
+            this.destroy()
+          }
+        }
       }
     } );
 
@@ -88,6 +92,10 @@ const Helicopter = new Phaser.Class( {
   },
 
   shoot () {
+    console.log( 'called' )
+    if ( !this.active ) {
+      return
+    }
     const missile = this.missile_group.get()
 
     if ( missile ) {
