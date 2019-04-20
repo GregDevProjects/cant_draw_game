@@ -1,4 +1,5 @@
-import { make_explode_effect } from '../helper'
+import { make_explode_effect, make_text_effect } from '../helper'
+
 
 const Bob = new Phaser.Class( {
 
@@ -49,17 +50,21 @@ const Bob = new Phaser.Class( {
 
   bobs_thanks (){
     this.scene.sound.add( 'thanks' ).play();
-    const plus_one_bob = this.scene.add.image( this.x, this.y, 'got_bob' )
-    this.scene.tweens.add( {
-      targets: plus_one_bob,
-      x: this.x,
-      y:  this.y -700,
-      duration: 1500,
-      alpha: 0,
-      onComplete: ( tween ) =>{
-        tween.targets[0].destroy()
-      }
-    } );
+    // const plus_one_bob = this.scene.add.image( this.x, this.y, 'got_bob' )
+
+    make_text_effect( this.scene, 'got_bob',this.x, this.y )
+
+
+    // this.scene.tweens.add( {
+    //   targets: plus_one_bob,
+    //   x: this.x,
+    //   y:  this.y -700,
+    //   duration: 1500,
+    //   alpha: 0,
+    //   onComplete: ( tween ) =>{
+    //     tween.targets[0].destroy()
+    //   }
+    // } );
   },
 
   update: function ( time, delta )

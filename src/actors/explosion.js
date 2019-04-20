@@ -26,7 +26,6 @@ const Explosion = new Phaser.Class( {
 
   update: function ( time, delta )
   {
-    console.log( 'yo' )
     if ( this && this.active ){
       this.setScale( this.scaleX+=growth_speed, this.scaleY+=growth_speed )
       if( this.scaleX > max_size ) {

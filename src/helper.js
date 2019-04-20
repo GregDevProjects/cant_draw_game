@@ -42,7 +42,9 @@ export function make_button_tween ( target,scene ) {
 }
 
 export function make_explode_effect ( scene, target, img='orange_particle' ) {
-  scene.add.particles( img ).createEmitter( {
+  const particles = scene.add.particles( img )
+
+  particles.createEmitter( {
     x: target.x,
     y: target.y,
     speed: { min: -400, max: 400 },
@@ -50,6 +52,22 @@ export function make_explode_effect ( scene, target, img='orange_particle' ) {
     blendMode: 'SCREEN',
     lifespan: 400,
     quantity: 20,
-    scale: {start:5,end:0}
+    scale: {start:5,end:0},
   } ).explode();
+
+  particles.setDepth( 2 );
+}
+
+export function make_text_effect ( scene, image_key, x, y ) {
+  const image = scene.add.image( x, y, image_key )
+  scene.tweens.add( {
+    targets: image,
+    x: x,
+    y:  y -700,
+    duration: 1500,
+    alpha: 0,
+    onComplete: ( tween ) =>{
+      tween.targets[0].destroy()
+    }
+  } );
 }

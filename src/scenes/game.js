@@ -9,6 +9,7 @@ import make_track_1 from '../tracks/1'
 import make_track_2 from '../tracks/2'
 import make_track_3 from '../tracks/3'
 import Spawner from '../spawner'
+import make_track_4 from '../tracks/4';
 
 
 export class Game extends Phaser.Scene {
@@ -25,6 +26,7 @@ export class Game extends Phaser.Scene {
     make_track_1( this )
     make_track_2( this )
     make_track_3( this )
+    make_track_4( this )
     this.bus_group = this.add.group( {
       classType: Bus,
       maxSize: 10,
@@ -55,9 +57,9 @@ export class Game extends Phaser.Scene {
       this.player.x = startAt.x
       this.player.y = startAt.y
     }
-    const startAt = {x:100.78208879751094, y:-21939}
-    this.player.x = startAt.x
-    this.player.y = startAt.y
+    // const startAt = {x:2.086665195493765, y:-29953.72528136941}
+    // this.player.x = startAt.x
+    // this.player.y = startAt.y
 
   }
 

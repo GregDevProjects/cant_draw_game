@@ -20,6 +20,14 @@ import bob from '../assets/bob.png'
 import got_bob from '../assets/got_bob.png'
 import ouch from '../assets/ouch.wav'
 import thanks from '../assets/thanks.wav'
+import helicopter from '../assets/helicopter.png'
+import track_4 from '../assets/track_4.png'
+import missile from '../assets/missile.png'
+import yellow_particle from '../assets/yellow_particle.png'
+import health_1 from '../assets/1.png'
+import health_2 from '../assets/2.png'
+import health_3 from '../assets/3.png'
+import explode_dead from '../assets/explode_dead.png'
 
 import {width_game, height_game, make_button_tween} from '../helper'
 
@@ -41,6 +49,7 @@ export class MainMenu extends Phaser.Scene {
     this.load.image( 'track_1', track_1 )
     this.load.image( 'track_2', track_2 )
     this.load.image( 'track_3', track_3 )
+    this.load.image( 'track_4', track_4 )
     this.load.image( 'grass_dead', grass_dead )
     this.load.image( 'restart', restart )
     this.load.image( 'orange_particle',orange_particle )
@@ -51,6 +60,13 @@ export class MainMenu extends Phaser.Scene {
     this.load.image( 'got_bob', got_bob )
     this.load.audio( 'ouch', ouch )
     this.load.audio( 'thanks', thanks )
+    this.load.image( 'helicopter', helicopter )
+    this.load.image( 'missile', missile )
+    this.load.image( 'yellow_particle', yellow_particle )
+    this.load.image( 'health_1', health_1 )
+    this.load.image( 'health_2', health_2 )
+    this.load.image( 'health_3', health_3 )
+    this.load.image( 'explode_dead', explode_dead )
   }
 
   create () {

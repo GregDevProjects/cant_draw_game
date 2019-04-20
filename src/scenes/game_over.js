@@ -7,9 +7,10 @@ export class GameOver extends Phaser.Scene {
   }
 
   init ( data ) {
-    console.log( 'init', data );
     if ( data.death == "grass" ) {
       this.add.image( width_game/2,height_game/2,'grass_dead' )
+    } else if ( data.death == "explode" ) {
+      this.add.image( width_game/2,height_game/2,'explode_dead' )
     }
 
   }

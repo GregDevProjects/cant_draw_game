@@ -1,5 +1,6 @@
 import {control_matter_object} from '../controller'
 import {editor_mode} from '../controller'
+import {make_text_effect} from '../helper'
 
 export default class Player extends Phaser.Physics.Matter.Image {
   constructor ( config ) {
@@ -27,7 +28,8 @@ export default class Player extends Phaser.Physics.Matter.Image {
     this.grass_emitter.setVisible( false )
     this.queue_speed = false
     this.grass_emitter.active = false
-    //so the emitter is under this
+    this.health = 4
+    //so the grass emitter is under this
     this.setDepth( 1 )
   }
 
@@ -52,6 +54,13 @@ export default class Player extends Phaser.Physics.Matter.Image {
         if ( gameObjectB.constructor.name === "SpeedArrow" ) {
           this.queue_speed = true;
         }
+        if ( gameObjectB.constructor.name === "Missile" ) {
+          this.missile_hit()
+        }
+        if ( gameObjectB.constructor.name === "Explosion" ) {
+          this.take_damage()
+          this.start_spin()
+        }
       },
       context: this
     } );
@@ -72,23 +81,57 @@ export default class Player extends Phaser.Physics.Matter.Image {
     } );
 
   }
+  start_spin () {
+    this.spinning = true
+    this.scene.time.delayedCall( 1000, ()=>{ this.spinning = false }, [], this );
+  }
 
+  missile_hit () {
+
+    this.queue_back = true
+    this.take_damage()
+    this.start_spin()
+    this.spinning = true
+  }
   timerDeath () {
     if ( !this.grass_timer ||  this.grass_timer.getProgress() < 1 ) {
       return
     }
     this.scene.scene.stop()
-    this.scene.scene.start( 'game_over', {death: "grass"} )
+    this.scene.scene.start( 'game_over', {death: "explode"} )
+  }
+
+  take_damage () {
+    if ( this.spinning ) {
+      return
+    }
+
+    this.health--
+    if ( this.health <=0 ) {
+      this.scene.scene.stop()
+      this.scene.scene.start( 'game_over', {death: "explode"} )
+    }
+
+    make_text_effect( this.scene, 'health_' + this.health,this.x, this.y )
   }
 
   update () {
-    control_matter_object( this.cursors, this )
+    if ( this.spinning ) {
+      this.angle+=6
+    } else {
+      control_matter_object( this.cursors, this )
+    }
+
     if ( this.grass_timer ) {
       this.show_time_to_grass_death()
     }
     if ( this.queue_speed ) {
       Phaser.Physics.Matter.Matter.Body.applyForce( this.body,{x: this.x, y: this.y}, {x: 0, y: -0.55} )
       this.queue_speed = false
+    }
+    if ( this.queue_back ) {
+      this.queue_back = false
+      Phaser.Physics.Matter.Matter.Body.applyForce( this.body,{x: this.x, y: this.y}, {x: 0, y: 0.2} )
     }
   }
 
