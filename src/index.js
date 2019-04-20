@@ -3,6 +3,7 @@ import Phaser from "phaser";
 import { MainMenu } from './scenes/main_menu'
 import { Game } from './scenes/game'
 import { GameOver } from './scenes/game_over'
+import { Win } from './scenes/win'
 import PhaserMatterCollisionPlugin from "phaser-matter-collision-plugin"
 import { width_game, height_game } from './helper'
 
@@ -14,7 +15,7 @@ let config = {
   physics: {
     default: 'matter',
     matter: {
-      debug: false,
+      debug: true,
       gravity: {
         x: 0,
         y: 0
@@ -33,7 +34,8 @@ let config = {
   scene: [
     MainMenu,
     Game,
-    GameOver
+    GameOver,
+    Win
   ]
 
 };

@@ -1,30 +1,15 @@
 const turn_speed = 0.05
 const move_speed = 0.02
 
-export const editor_mode = false
+export const editor_mode = true
 export function control_matter_object ( cursors, object ) {
   if ( cursors.left.isDown )
   {
-    //object.setAngularVelocity( -turn_speed );
-    //object.thrustLeft( move_speed )
-    //object.x-=5
     object.angle=240
-    // if ( object.angle<=240 )
-    //   object.angle--
-
-    //object.body.applyForce()
     Phaser.Physics.Matter.Matter.Body.applyForce( object.body,{x: object.x, y: object.y}, {x: -0.002, y: 0} )
-    // console.log(  )
-    //debugger
   }
   else if ( cursors.right.isDown )
   {
-    //object.setAngularVelocity( turn_speed );
-    //object.thrustRight( move_speed )
-    // if ( object.angle<=-50 ){
-    //   object.angle++
-    //   console.log( object.angle++ )
-    // }
     object.angle=300
     Phaser.Physics.Matter.Matter.Body.applyForce( object.body,{x: object.x, y: object.y}, {x: 0.002, y: 0} )
   }

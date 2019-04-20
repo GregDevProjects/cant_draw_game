@@ -175,6 +175,13 @@ export default class Player extends Phaser.Physics.Matter.Image {
     }
     this.pizza_img.x = this.x
     this.pizza_img.y = this.y
+
+    if ( this.y < -40033 && !this.game_is_won ) {
+      this.game_is_won = true
+      this.scene.scene.stop()
+      this.scene.scene.start( 'win', {} )
+      console.log( 'win' )
+    }
   }
 
   shoot_pizza ( coords ) {
