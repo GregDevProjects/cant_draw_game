@@ -33,9 +33,8 @@ const Bob = new Phaser.Class( {
       callback: eventData => {
         const { bodyB, gameObjectB } = eventData;
         if ( gameObjectB.constructor.name === "Player" ) {
+          this.scene.player.report_card.got_bob = true
           this.bobs_thanks()
-
-
         } else {
           this.scene.sound.add( 'ouch' ).play();
           make_explode_effect( this.scene, this, 'red_particle' )
@@ -50,21 +49,7 @@ const Bob = new Phaser.Class( {
 
   bobs_thanks (){
     this.scene.sound.add( 'thanks' ).play();
-    // const plus_one_bob = this.scene.add.image( this.x, this.y, 'got_bob' )
-
     make_text_effect( this.scene, 'got_bob',this.x, this.y )
-
-
-    // this.scene.tweens.add( {
-    //   targets: plus_one_bob,
-    //   x: this.x,
-    //   y:  this.y -700,
-    //   duration: 1500,
-    //   alpha: 0,
-    //   onComplete: ( tween ) =>{
-    //     tween.targets[0].destroy()
-    //   }
-    // } );
   },
 
   update: function ( time, delta )

@@ -97,8 +97,8 @@ export class MainMenu extends Phaser.Scene {
 
     this.start()
 
-    this.scene.stop();
-    this.scene.start( 'win' );
+    // this.scene.stop();
+    // this.scene.start( 'win' );
   }
 
 

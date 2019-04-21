@@ -51,6 +51,7 @@ const Helicopter = new Phaser.Class( {
           this.health --
           if ( this.health <= 0 ) {
             make_explode_effect( this.scene, this, undefined, true )
+            this.scene.player.report_card.destroyed_helicopter = true
             this.missile_timer.destroy()
             this.destroy()
           }

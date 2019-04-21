@@ -44,8 +44,15 @@ export default class Player extends Phaser.Physics.Matter.Image {
     this.pizza_img.setDepth( 2 )
     this.pizza_img.angle = 90
     this.pizza_img.setVisible( false )
-
+    this.arrows_hit = 0
     this.mouseHandler()
+    //TODO: refactor into a separate class
+    this.report_card = {
+      got_bob : false,
+      finished_alive : false,
+      destroyed_helicopter : false,
+      hit_7_arrows : false
+    }
   }
 
   mouseHandler () {
@@ -80,6 +87,7 @@ export default class Player extends Phaser.Physics.Matter.Image {
           return
         }
         if ( gameObjectB.constructor.name === "SpeedArrow" ) {
+          this.arrows_hit ++
           this.queue_speed = true;
         }
         if ( gameObjectB.constructor.name === "Missile" ) {
@@ -177,10 +185,13 @@ export default class Player extends Phaser.Physics.Matter.Image {
     this.pizza_img.y = this.y
 
     if ( this.y < -40033 && !this.game_is_won ) {
+      if ( this.arrows_hit >= 7 ) {
+        this.report_card.hit_7_arrows = true
+      }
+      this.report_card.finished_alive = true
       this.game_is_won = true
       this.scene.scene.stop()
-      this.scene.scene.start( 'win', {} )
-      console.log( 'win' )
+      this.scene.scene.start( 'win', this.report_card )
     }
   }
 

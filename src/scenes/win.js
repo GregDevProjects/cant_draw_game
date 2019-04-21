@@ -8,10 +8,7 @@ export class Win extends Phaser.Scene {
 
   init ( data ) {
     this.add.image( width_game/2,height_game/2,'report' )
-    data.got_bob = true
-    data.finished_alive = true
-    data.destroyed_helicopter = true
-    data.hit_7_arrows = true
+
     if( data.got_bob ) {
       this.add.image( 56,300,'report_checked' )
     } else {
@@ -62,9 +59,10 @@ export class Win extends Phaser.Scene {
       return 'A'
     } else if ( true_count === 2 ) {
       return 'B'
-    }else if ( true_count ===1 ) {
-      return 'C'
     }
+
+    return 'C'
+
   }
 
 

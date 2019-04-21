@@ -52,9 +52,12 @@ const Tnt = new Phaser.Class( {
         if ( gameObjectB.constructor.name === "PizzaProjectile" || gameObjectB.constructor.name === "Missile" ) {
           this.explode()
 
-          return;
+          return
         }
 
+        if ( gameObjectB.constructor.name === "Helicopter" ) {
+          return
+        }
         this.spin_out_explode()
       }
     } );
