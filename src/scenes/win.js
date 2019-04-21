@@ -8,7 +8,7 @@ export class Win extends Phaser.Scene {
 
   init ( data ) {
     this.add.image( width_game/2,height_game/2,'report' )
-
+    this.grade = this.get_grade( data )
     if( data.got_bob ) {
       this.add.image( 56,300,'report_checked' )
     } else {
@@ -33,13 +33,7 @@ export class Win extends Phaser.Scene {
       this.add.image( 435,390, 'report_unchecked' )
     }
 
-    this.add.image( 330,530, this.get_grade( data ) )
-
-    // if ( data.death == "grass" ) {
-    //   this.add.image( width_game/2,height_game/2,'grass_dead' )
-    // } else if ( data.death == "explode" ) {
-    //   this.add.image( width_game/2,height_game/2,'explode_dead' )
-    // }
+    this.add.image( 330,530, this.grade )
 
   }
 
@@ -77,7 +71,7 @@ export class Win extends Phaser.Scene {
       .setInteractive( {cursor: 'pointer'} )
       .on( 'pointerdown', ( event ) => {
         this.scene.stop();
-        this.scene.start( 'game' );
+        this.scene.start( 'gertrude', {grade: this.grade} );
       }, this )
 
     make_button_tween( next_button, this )

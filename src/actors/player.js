@@ -25,7 +25,7 @@ export default class Player extends Phaser.Physics.Matter.Image {
     this.grass_text = this.scene.add.text( this.x,this.y )
     this.grass_text.setVisible( false )
     this.grass_text.setDepth( 2 )
-    this.grass_emitter.startFollow( this, 250, 10 );
+    this.grass_emitter.startFollow( this, 250, 40 );
     this.grass_emitter.setVisible( false )
     this.queue_speed = false
     this.grass_emitter.active = false
@@ -146,7 +146,7 @@ export default class Player extends Phaser.Physics.Matter.Image {
       return
     }
     this.scene.scene.stop()
-    this.scene.scene.start( 'game_over', {death: "explode"} )
+    this.scene.scene.start( 'game_over', {death: "grass"} )
   }
 
   take_damage () {

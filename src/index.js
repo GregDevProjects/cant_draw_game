@@ -4,6 +4,7 @@ import { MainMenu } from './scenes/main_menu'
 import { Game } from './scenes/game'
 import { GameOver } from './scenes/game_over'
 import { Win } from './scenes/win'
+import {Gertrude} from './scenes/gertrude'
 import PhaserMatterCollisionPlugin from "phaser-matter-collision-plugin"
 import { width_game, height_game } from './helper'
 
@@ -35,7 +36,8 @@ let config = {
     MainMenu,
     Game,
     GameOver,
-    Win
+    Win,
+    Gertrude
   ]
 
 };

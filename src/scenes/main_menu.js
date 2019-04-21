@@ -39,6 +39,12 @@ import A_plus from '../assets/A+.png'
 import A from '../assets/A.png'
 import B from '../assets/B.png'
 import C from '../assets/C.png'
+import gertrude from '../assets/gertrude.png'
+import end_c from '../assets/end_c.png'
+import end_b from '../assets/end_b.png'
+import end_a from '../assets/end_a.png'
+import end_a_plus from '../assets/end_a_plus.png'
+import blue_particle from '../assets/blue_particle.png'
 
 import {width_game, height_game, make_button_tween} from '../helper'
 
@@ -89,6 +95,12 @@ export class MainMenu extends Phaser.Scene {
     this.load.image( 'B', B )
     this.load.image( 'C', C )
     this.load.image( 'next', next )
+    this.load.image( 'gertrude', gertrude )
+    this.load.image( 'end_c',end_c )
+    this.load.image( 'end_b', end_b )
+    this.load.image( 'end_a', end_a )
+    this.load.image( 'end_a_plus', end_a_plus )
+    this.load.image( 'blue_particle', blue_particle )
   }
 
   create () {

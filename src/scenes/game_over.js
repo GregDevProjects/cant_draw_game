@@ -23,7 +23,7 @@ export class GameOver extends Phaser.Scene {
 
     //TODO: get interactive cursor working .setInteractive({ cursor: 'url(assets/main_menu_pizza.png), pointer'})
     const restart_button = this.add.image( width_game/2, 450, 'restart' )
-      .setInteractive()
+      .setInteractive( {cursor: 'pointer'} )
       .on( 'pointerdown', ( event ) => {
         this.scene.stop();
         this.scene.start( 'game' );

@@ -93,7 +93,6 @@ const Helicopter = new Phaser.Class( {
   },
 
   shoot () {
-    console.log( 'called' )
     if ( !this.active ) {
       return
     }

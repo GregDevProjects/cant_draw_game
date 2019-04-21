@@ -34,7 +34,7 @@ const SpeedArrow = new Phaser.Class( {
       callback: eventData => {
         const { bodyB, gameObjectB } = eventData;
         if ( gameObjectB.constructor.name === "Player" ) {
-          make_explode_effect( this.scene,this, 'red_particle' )
+          make_explode_effect( this.scene,this, 'blue_particle' )
           this.destroy()
         }
 
